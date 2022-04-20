@@ -1,10 +1,15 @@
-
-function createDogListItem(dog){
+function createDogListItem(dog) {
   const li = document.createElement("li");
   const dogContainer = document.querySelector(".main");
 
   li.className = "dogs-list__button";
   li.innerText = dog.name;
+
+  li.addEventListener("click", function () {
+    dogContainer.delete(dogContainer[0]);
+    createDogCard(dog);
+    dogContainer.append(li);
+  });
 
   // (1)
   //TODO: Here, add a click event listener
@@ -13,19 +18,25 @@ function createDogListItem(dog){
   //the dog variable as a parameter. You will
   //also need to remove any existing dog card
   //from the dogContainer
- 
+
   return li;
-};
+}
 
 function createSection() {
   const section = document.createElement("section");
   section.className = "main__dog-section";
   return section;
-};
+}
 
 const createDogCardDesc = (bio) => {
   const div = document.createElement("div");
   div.className = "main__dog-section__desc";
+
+  const header = document.createElement("h1");
+  header.innerText = dog.name;
+
+  const text = document.createElement(p);
+  text.innerText = bio;
 
   //(2)
   //TODO: Update this section to create new elements
@@ -50,22 +61,25 @@ function createDogCardBottomSection(dog) {
 
   div.append(text, button);
   return div;
-};
+}
 
 const createDogCard = (dog) => {
   const section = createSection();
   const header = document.createElement("h2");
   header.innerText = dog.name;
 
+  const dogIMG = document.createElement("img");
+  dogIMG.width = 256;
+  dogIMG.src = dog.image;
   // (3)
   //TODO: Update this section to create a new image
-  //element and add it to the dog card. Set the source of 
+  //element and add it to the dog card. Set the source of
   //the image to the image path on the dog object
-  
+
   const desc = createDogCardDesc(dog.bio);
   const bottomSection = createDogCardBottomSection(dog);
 
-  section.append(header, desc, bottomSection);
+  section.append(header, dogIMG, desc, bottomSection);
 
   return section;
 };
@@ -85,6 +99,11 @@ function createForm() {
   form.className = "form";
   submitInput.className = "form__button";
 
+  form.addEventListener("submit", function () {
+    //add an item at the top of the page
+    //add a new object into the dogs array with the data from the form
+  });
+
   //(5)
   //TODO: Add an event listener on to the form to capture the
   //submit event. In the submit event, add a item  to the
@@ -101,7 +120,7 @@ function createForm() {
     submitInput
   );
   return form;
-};
+}
 
 function createInput(idName, type = "text", value) {
   let input = null;
@@ -128,7 +147,7 @@ function createLabel(forAttr, text) {
   label.innerText = text;
 
   return label;
-};
+}
 
 function renderMainForm() {
   const section = createSection();
@@ -140,7 +159,7 @@ function renderMainForm() {
   section.append(h2, form);
 
   return section;
-};
+}
 
 function renderDogList(dogsArr) {
   const listContainer = document.querySelector(".dogs-list");
@@ -148,16 +167,19 @@ function renderDogList(dogsArr) {
     const item = createDogListItem(dog);
     listContainer.append(item);
   }
-};
+}
 
 renderDogList(data);
 
 const formButton = document.querySelector(".dogs-list__button--add");
 const dogContainer = document.querySelector(".main");
 
+formButton.addEventListener("click", function () {
+  renderMainForm();
+});
 // (4)
 //TODO: Add an event listener on to form button so that
 //when the user clicks the button, the form is displayed.
 //the renderMainForm method will return an element that
-//contains the form, so you only need to add it to the 
+//contains the form, so you only need to add it to the
 //dogContainer and remove any existing children.

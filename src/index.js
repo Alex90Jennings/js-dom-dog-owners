@@ -33,14 +33,14 @@ function createDogCard(dog) {
   dogIMG.width = 256;
   dogIMG.src = dog.image;
 
-  const desc = createDogCardDesc(dog, dog.bio);
+  const desc = createDogCardDesc(dog.bio);
   const bottomSection = createDogCardBottomSection(dog);
 
   section.append(header, dogIMG, desc, bottomSection);
   return section;
 }
 
-const createDogCardDesc = (dog, bio) => {
+const createDogCardDesc = (bio) => {
   const div = document.createElement("div");
   div.className = "main__dog-section__desc";
 
